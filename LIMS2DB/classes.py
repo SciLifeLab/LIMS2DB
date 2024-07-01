@@ -471,16 +471,17 @@ class ProjectSQL:
                 self.log.info("Trying to save new doc for project {}".format(self.pid))
                 db.save(self.obj)
                 if self.obj.get('details', {}).get('type', '') == 'Application':
+                    lib_method_text=f"Library method: {self.obj['details'].get('library_construction_method', 'N/A')}"
                     if 'key  details contract_received' in diffs.keys():
                         genstat_url = f'{self.genstat_proj_url}{self.obj["project_id"]}'
                         if diffs['key  details contract_received'][1] == 'missing':
                             old_contract_received = diffs['key  details contract_received'][0]
                             msg = f'Contract received on {old_contract_received} deleted for applications project '
-                            msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a>.'
+                            msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a>[{lib_method_text}].'
                         else:
                             contract_received = diffs['key  details contract_received'][1]
                             msg = 'Contract received for applications project '
-                            msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a> on {contract_received}.'
+                            msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a>[{lib_method_text}] on {contract_received}.'
 
                         send_mail(f'Contract updated for GA Project {self.obj["project_name"]}', msg, 'ngi_ga_projects@scilifelab.se')
             else:
@@ -493,8 +494,9 @@ class ProjectSQL:
             db.save(self.obj)
             if self.obj.get('details', {}).get('type', '') == 'Application':
                 genstat_url = f'{self.genstat_proj_url}{self.obj["project_id"]}'
+                lib_method_text=f"Library method: {self.obj['details'].get('library_construction_method', 'N/A')}"
                 msg = 'New applications project created '
-                msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a>.'
+                msg += f'<a href="{genstat_url}">{self.obj["project_id"]}, {self.obj["project_name"]}</a>[{lib_method_text}].'
                 send_mail(f'GA Project created {self.obj["project_name"]}', msg, 'ngi_ga_projects@scilifelab.se')
 
     def get_project_level(self):
