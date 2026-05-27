@@ -21,7 +21,7 @@ def main(args):
         conf = yaml.load(conf_file, Loader=yaml.SafeLoader)
     statusdb = load_couch_server(conf)
 
-    operator = "par.lundin@scilifelab.se"
+    operator = "genomics-bioinfo@scilifelab.se"
     summary = {}
     project_types = [
         "Aggregate QC (DNA) 4.0",
