@@ -146,6 +146,7 @@ SEQSTART = {
     "2558": "ONT Process Started Runs",
     "2614": "Load to Flowcell (NovaSeqXPlus) v1.0",
     "3160": "Load to Flowcell (AVITI) v1.0",
+    "3913": "ONT Start Sequencing v3.0",
 }
 DILSTART = {
     "39": "Library Normalization (Illumina SBS) 4.0",
